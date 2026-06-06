@@ -276,6 +276,36 @@ type Tagged = { readonly base: Base; readonly tag: string }
 type Tagged = { readonly id: string; readonly name: string; readonly tag: string }
 ```
 
+**No conditional types.**
+
+```ts
+// ❌
+type NonNullable<T> = T extends null ? never : T
+
+// ✅ — write the concrete type directly
+type Name = string
+```
+
+**No mapped types.**
+
+```ts
+// ❌
+type Nullable<T> = { readonly [K in keyof T]: T[K] | null }
+
+// ✅ — spell out the fields explicitly
+type NullableUser = { readonly id: number | null; readonly name: string | null }
+```
+
+**No `infer`.**
+
+```ts
+// ❌
+type Unpacked<T> = T extends Promise<infer U> ? U : T
+
+// ✅ — write the concrete unwrapped type directly
+type UnpackedUser = User
+```
+
 **Banned utility types: `Partial`, `Required`, `Record`, `Readonly` (wrapper form), `InstanceType`, `ConstructorParameters`, `ThisType`.**
 
 ```ts
@@ -390,6 +420,9 @@ import { add } from "./math/add.ts"
 | Index signature `[k: string]: T` | `Map<string, T>` |
 | `Partial<T>` | Spell out optional fields with `\| null` |
 | Intersection `A & B` | Spell out fields or compose by value |
+| Conditional type `T extends U ? X : Y` | Write the concrete type directly |
+| Mapped type `{ [K in keyof T]: ... }` | Spell out the fields explicitly |
+| `infer` | Write the concrete type directly |
 | `Object.assign` / `Object.create` | Spread `{ ...a, ...b }` |
 | `Proxy` / `Reflect` | Direct access |
 | `eval` | Never |
@@ -423,3 +456,5 @@ import { add } from "./math/add.ts"
 9. **Using ternary for conditional values** — extract a named function instead.
 
 10. **Omitting return type** — every function declaration needs an explicit `: ReturnType` annotation.
+
+11. **Using type-level metaprogramming** — no conditional types (`T extends U ? X : Y`), no mapped types (`{ [K in keyof T]: ... }`), no `infer`. Write the concrete type you actually mean.
