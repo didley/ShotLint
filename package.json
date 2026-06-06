@@ -30,7 +30,8 @@
   "scripts": {
     "build": "tsc",
     "test": "node --import tsx/esm tests/runner.ts && node --import tsx/esm --test tests/utils.test.ts",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "glob": "^11.0.0",
