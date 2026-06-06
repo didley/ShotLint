@@ -10,8 +10,8 @@
   },
 "exports": {
     ".": {
-      "import": "./dist/checker/mod.js",
-      "types": "./dist/checker/mod.d.ts"
+      "import": "./dist/checker/index.js",
+      "types": "./dist/checker/index.d.ts"
     },
     "./utils": {
       "import": "./dist/utils/index.js",
@@ -21,8 +21,8 @@
     "./tsconfig/shot-lint.json": "./tsconfig/shot-lint.json",
     "./biome": "./biome/biome.json"
   },
-  "main": "./dist/checker/mod.js",
-  "types": "./dist/checker/mod.d.ts",
+  "main": "./dist/checker/index.js",
+  "types": "./dist/checker/index.d.ts",
   "files": [
     "dist/",
     "tsconfig/",

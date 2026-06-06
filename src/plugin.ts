@@ -1,5 +1,5 @@
 import type ts from 'typescript'
-import { check } from './checker/mod.js'
+import { check } from './checker/index.js'
 
 function init(modules: { typescript: typeof ts }): { create: (info: ts.server.PluginCreateInfo) => ts.LanguageService } {
     const tsModule = modules.typescript

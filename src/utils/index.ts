@@ -124,13 +124,3 @@ export function wrapError(message: string, cause: Error): Error {
     return err
 }
 
-/**
- * Returns a single-slot mutable cell — the canonical way to hold mutable state
- * when no-let-outside-for bans let in function bodies and module scope.
- *
- *   const count = mutableRef(0)
- *   count.value += 1
- */
-export function mutableRef<T>(initial: T): { value: T } {
-    return { value: initial }
-}
