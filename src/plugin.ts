@@ -24,7 +24,7 @@ function init(modules: { typescript: typeof ts }): { create: (info: ts.server.Pl
             if (sourceFile === undefined) return prior
 
             const source = sourceFile.getFullText()
-            const shotDiags = check(fileName, source)
+            const shotDiags = check(fileName, source, program?.getTypeChecker(), sourceFile)
 
             const converted: ts.Diagnostic[] = shotDiags.map(function(d) {
                 const start = sourceFile.getPositionOfLineAndCharacter(d.line - 1, d.col - 1)

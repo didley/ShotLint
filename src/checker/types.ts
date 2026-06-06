@@ -12,6 +12,7 @@ export type Context = {
     file: string
     source: string
     sourceFile: ts.SourceFile
+    typeChecker: ts.TypeChecker | undefined
     push(d: Omit<Diagnostic, "file">): void
 }
 
