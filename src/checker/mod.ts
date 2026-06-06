@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Diagnostic, Context } from "./types.ts"
-import { rules } from "./rules/index.ts"
+import type { Diagnostic, Context } from "./types.js"
+import { rules } from "./rules/index.js"
 
 export function posOf(sourceFile: ts.SourceFile, node: ts.Node): { line: number; col: number } {
     const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile))
@@ -15,6 +15,7 @@ export function check(file: string, source: string): Diagnostic[] {
     const parseDiags: ts.DiagnosticWithLocation[] = (sourceFile as any).parseDiagnostics ?? []
     if (parseDiags.length > 0) {
         const d = parseDiags[0]
+        if (!d) return diagnostics
         const pos = sourceFile.getLineAndCharacterOfPosition(d.start ?? 0)
         diagnostics.push({
             file,

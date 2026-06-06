@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 function nodeText(node: ts.Node, sf: ts.SourceFile): string {
     return sf.text.slice(node.getStart(sf), node.getEnd())

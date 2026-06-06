@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 const LOGICAL_ASSIGN_OPS = new Set([
     ts.SyntaxKind.BarBarEqualsToken,

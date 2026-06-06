@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 const BANNED_GLOBALS = new Set(["Proxy", "Reflect", "Function", "Symbol"])
 const BANNED_OBJECT_METHODS = new Set([

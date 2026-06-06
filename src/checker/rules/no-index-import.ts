@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 const INDEX_SUFFIXES = ["/index.ts", "/index.tsx", "/index.js", "/index.mjs", "/index.cjs"]
 

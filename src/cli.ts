@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs"
 import { resolve, relative } from "node:path"
 import { globSync } from "glob"
-import { check } from "./checker/mod.ts"
+import { check } from "./checker/mod.js"
 
 function usage(): void {
     process.stderr.write("Usage: shot-rules <glob...>\n")

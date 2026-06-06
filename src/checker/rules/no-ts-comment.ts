@@ -1,5 +1,5 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
+import type { Rule } from "../types.js"
 
 const TS_ESCAPE = /^\s*@ts-(ignore|expect-error|nocheck)\b/
 

@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 function isBooleanLiteral(node: ts.TypeNode): boolean {
     return ts.isLiteralTypeNode(node) &&
@@ -12,7 +12,7 @@ export const noLiteralBooleanType: Rule = {
     visit(node, ctx) {
         if (ts.isUnionTypeNode(node) && node.types.length === 2) {
             const [a, b] = node.types
-            if (isBooleanLiteral(a) && isBooleanLiteral(b)) {
+            if (a && b && isBooleanLiteral(a) && isBooleanLiteral(b)) {
                 ctx.push({ ...posOf(ctx.sourceFile, node), rule: "no-literal-boolean-type", message: "`true | false` is just `boolean`." })
             }
         }

@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 function hasAbstract(node: ts.ClassDeclaration | ts.ClassExpression): boolean {
     return node.modifiers?.some(m => m.kind === ts.SyntaxKind.AbstractKeyword) ?? false

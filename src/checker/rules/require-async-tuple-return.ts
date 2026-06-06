@@ -1,6 +1,6 @@
 import ts from "typescript"
-import type { Rule } from "../types.ts"
-import { posOf } from "../mod.ts"
+import type { Rule } from "../types.js"
+import { posOf } from "../mod.js"
 
 // Returns true if typeNode is a union containing `null` (i.e. `X | null`).
 function containsNull(typeNode: ts.TypeNode): boolean {
@@ -26,13 +26,15 @@ function isValidAsyncReturn(typeNode: ts.TypeNode): boolean {
     const args = typeNode.typeArguments
     if (!args || args.length !== 1) return false
     const inner = args[0]
+    if (!inner) return false
 
     if (inner.kind === ts.SyntaxKind.VoidKeyword) return true
     if (inner.kind === ts.SyntaxKind.NeverKeyword) return true
 
     if (!ts.isTupleTypeNode(inner)) return false
     if (inner.elements.length !== 2) return false
-    return containsNull(inner.elements[1])
+    const second = inner.elements[1]
+    return second !== undefined && containsNull(second)
 }
 
 export const requireAsyncTupleReturn: Rule = {
