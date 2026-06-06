@@ -1,7 +1,7 @@
 {
-  "name": "shot-rules",
+  "name": "shot-discipline",
   "version": "0.1.0",
-  "description": "Go-style discipline for TypeScript. One canonical way to write every construct — 90+ AST rules enforced by a standalone CLI.",
+  "description": "Go-style TypeScript. One way to do everything — rules, safe utils, and agent context in one package.",
   "license": "MIT",
   "repository": {
     "type": "git",

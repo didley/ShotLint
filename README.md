@@ -5,15 +5,21 @@
  ╚════██║██╔══██║██║   ██║   ██║
  ███████║██║  ██║╚██████╔╝   ██║
  ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝
- rules — Go-style discipline for any TypeScript project.
+ discipline — Go-style TypeScript. One way to do everything.
 ```
 
-TypeScript has four ways to write a function, three ways to handle errors, and two ways to declare a type — and most codebases use all of them. `shot-rules` picks one of each and bans the rest.
+TypeScript has four ways to write a function, three ways to handle errors, and two ways to declare a type — and most codebases use all of them. shot picks one of each and bans the rest.
 
-90+ AST rules. Standalone CLI. Works with any runtime, any framework, no framework at all.
+Three things in one package:
+
+| | |
+|---|---|
+| **Rules** | 90+ AST rules enforced by a standalone CLI — no ESLint, no Biome, no framework lock-in |
+| **Utils** | Safe replacements for every banned global (`jsonParse`, `safeFetch`, `tryCatch`, …) |
+| **`AGENTS.md`** | Drop-in context file so AI coding assistants generate compliant code from the start |
 
 ```sh
-npx shot-rules 'src/**/*.ts'
+npx shot-discipline 'src/**/*.ts'
 
 src/auth.ts:12:5:  [no-arrow-functions]        Arrow functions are not allowed.
 src/auth.ts:34:3:  [no-throw]                  throw is not allowed — return [null, error] instead.
@@ -88,18 +94,18 @@ Full rationale and before/after examples for every rule: [`docs/LANGUAGE.md`](ht
 
 ```sh
 # one-off
-npx shot-rules 'src/**/*.ts'
+npx shot-discipline 'src/**/*.ts'
 
 # per-project
-npm install --save-dev shot-rules
+npm install --save-dev shot-discipline
 
 # global
-npm install -g shot-rules
+npm install -g shot-discipline
 ```
 
 Add to `package.json`:
 ```json
-{ "scripts": { "lint": "shot-rules 'src/**/*.ts'" } }
+{ "scripts": { "lint": "shot-discipline 'src/**/*.ts'" } }
 ```
 
 Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
@@ -109,15 +115,15 @@ Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
 Ships a `tsconfig/shot-rules.json` with everything above `strict: true` — `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, and more.
 
 ```json
-{ "extends": "shot-rules/tsconfig/shot-rules.json" }
+{ "extends": "shot-discipline/tsconfig/shot-rules.json" }
 ```
 
 ## Runtime utils
 
-The rules ban `JSON.parse`, `JSON.stringify`, and `fetch` because they throw. `shot-rules/utils` provides the safe replacements — all return `[value, null] | [null, Error]`.
+The rules ban `JSON.parse`, `JSON.stringify`, and `fetch` because they throw. `shot-discipline/utils` provides the safe replacements — all return `[value, null] | [null, Error]`.
 
 ```ts
-import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-rules/utils"
+import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-discipline/utils"
 
 // third-party calls that might throw
 const [val, err] = tryCatch(() => someLib.parse(input))
@@ -131,7 +137,7 @@ const [res, err]   = await safeFetch("https://api.example.com/users/1")
 
 `Result<T>` is exported too — use it to type your own fallible functions:
 ```ts
-import type { Result } from "shot-rules/utils"
+import type { Result } from "shot-discipline/utils"
 
 function divide(a: number, b: number): Result<number> {
     if (b === 0) { return [null, new Error("division by zero")] }
@@ -153,7 +159,7 @@ Working projects in [`examples/`](./examples/):
 
 ```mermaid
 graph TD
-    SR["shot-rules\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm · any project"]
+    SR["shot-discipline\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm · any project"]
 
     SS["shot\n────────────────\n• .shot file extension\n• Deno runtime + CLI\n• shot:std library\n• locked tsconfig"]
 
@@ -164,7 +170,7 @@ graph TD
     SR -->|"npx shot-rules"| PROJ
 ```
 
-**shot-rules** — discipline on your terms, in your project.  
+**shot-discipline** — discipline on your terms, in your project.  
 **[shot](https://github.com/didley/EspressoScript)** — the full opinionated toolchain built on top of it.
 
 ## Development

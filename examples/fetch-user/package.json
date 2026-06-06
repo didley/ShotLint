@@ -7,7 +7,7 @@
     "start": "node --import tsx/esm src/fetchUser.ts"
   },
   "devDependencies": {
-    "shot-rules": "*",
+    "shot-discipline": "*",
     "tsx": "^4.0.0"
   }
 }
