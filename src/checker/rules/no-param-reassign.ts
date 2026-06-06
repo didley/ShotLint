@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule, Context } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 const ASSIGN_OPS = new Set([
     ts.SyntaxKind.EqualsToken,

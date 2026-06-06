@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 export const noDefaultExport: Rule = {
     name: "no-default-export",

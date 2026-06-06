@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 function isBooleanLiteral(node: ts.TypeNode): boolean {
     return ts.isLiteralTypeNode(node) &&

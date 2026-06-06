@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 const WRAPPER_TYPES = new Set(["String", "Number", "Boolean", "Symbol"])
 

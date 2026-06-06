@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 // Returns true if typeNode is a union containing `null` (i.e. `X | null`).
 function containsNull(typeNode: ts.TypeNode): boolean {

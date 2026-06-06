@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 const IDENT_RE = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/
 

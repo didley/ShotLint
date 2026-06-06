@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule, Context } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 type ScopeFrame = {
     bindings: Map<string, ts.Node>

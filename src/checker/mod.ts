@@ -1,11 +1,7 @@
 import ts from "typescript"
 import type { Diagnostic, Context } from "./types.js"
 import { rules } from "./rules/index.js"
-
-export function posOf(sourceFile: ts.SourceFile, node: ts.Node): { line: number; col: number } {
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile))
-    return { line: line + 1, col: character + 1 }
-}
+export { posOf } from "./pos.js"
 
 export function check(file: string, source: string): Diagnostic[] {
     const sourceFile = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)

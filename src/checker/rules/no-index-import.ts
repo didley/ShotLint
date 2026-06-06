@@ -1,8 +1,8 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
-const INDEX_SUFFIXES = ["/index.ts", "/index.tsx", "/index.js", "/index.mjs", "/index.cjs"]
+const INDEX_SUFFIXES = ["/index.shot", "/index.ts", "/index.tsx", "/index.js", "/index.mjs", "/index.cjs"]
 
 function isIndexPath(spec: string): boolean {
     return INDEX_SUFFIXES.some(function isSuffix(s: string): boolean { return spec.endsWith(s) })

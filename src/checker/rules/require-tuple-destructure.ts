@@ -1,6 +1,6 @@
 import ts from "typescript"
 import type { Rule } from "../types.js"
-import { posOf } from "../mod.js"
+import { posOf } from "../pos.js"
 
 const STD_FNS = new Set(["fetch", "jsonParse", "jsonStringify", "readFile", "writeFile"])
 
