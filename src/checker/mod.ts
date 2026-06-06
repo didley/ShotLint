@@ -7,8 +7,10 @@ export function check(file: string, source: string): Diagnostic[] {
     const sourceFile = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
     const diagnostics: Diagnostic[] = []
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const parseDiags: ts.DiagnosticWithLocation[] = (sourceFile as any).parseDiagnostics ?? []
+    interface SourceFileInternal {
+        parseDiagnostics?: ts.DiagnosticWithLocation[]
+    }
+    const parseDiags = (sourceFile as unknown as SourceFileInternal).parseDiagnostics ?? []
     if (parseDiags.length > 0) {
         const d = parseDiags[0]
         if (!d) return diagnostics
