@@ -18,6 +18,27 @@ Three things in one package:
 | **Utils** | Safe replacements for every banned global (`jsonParse`, `safeFetch`, `tryCatch`, …) |
 | **`AGENTS.md`** | Drop-in context file so AI coding assistants generate compliant code from the start |
 
+---
+
+## Install
+
+```sh
+npx shot-discipline 'src/**/*.ts'          # one-off, no install
+npm install --save-dev shot-discipline     # per-project
+```
+
+Add to `package.json`:
+```json
+{ "scripts": { "lint": "shot-discipline 'src/**/*.ts'" } }
+```
+
+Extend the strict tsconfig:
+```json
+{ "extends": "shot-discipline/tsconfig/shot-rules.json" }
+```
+
+---
+
 ```sh
 npx shot-discipline 'src/**/*.ts'
 
@@ -90,33 +111,11 @@ function load(input: unknown): [Config | null, Error | null] { ... }
 
 Full rationale and before/after examples for every rule: [`docs/LANGUAGE.md`](https://github.com/didley/EspressoScript/blob/main/docs/LANGUAGE.md).
 
-## Install
-
-```sh
-# one-off
-npx shot-discipline 'src/**/*.ts'
-
-# per-project
-npm install --save-dev shot-discipline
-
-# global
-npm install -g shot-discipline
-```
-
-Add to `package.json`:
-```json
-{ "scripts": { "lint": "shot-discipline 'src/**/*.ts'" } }
-```
-
 Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
 
 ## Strict tsconfig
 
 Ships a `tsconfig/shot-rules.json` with everything above `strict: true` — `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, and more.
-
-```json
-{ "extends": "shot-discipline/tsconfig/shot-rules.json" }
-```
 
 ## Runtime utils
 
