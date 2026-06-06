@@ -22,9 +22,15 @@ Three things in one package:
 
 ## Install
 
+**npm** · [npmjs.com/package/shot-lint](https://www.npmjs.com/package/shot-lint)
 ```sh
 npx shot-lint 'src/**/*.ts'          # one-off, no install
 npm install --save-dev shot-lint     # per-project
+```
+
+**jsr** · [jsr.io/@shot/lint](https://jsr.io/@shot/lint)
+```sh
+deno add jsr:@shot/lint
 ```
 
 Add to `package.json`:
