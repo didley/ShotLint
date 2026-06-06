@@ -8,7 +8,6 @@
  * Usage:
  *   import { toResult, toPromiseResult, jsonParse, jsonStringify, safeFetch } from "shot-lint/utils"
  */
-
 export type Result<T, E extends Error = Error> = [T, null] | [null, E]
 
 /**
