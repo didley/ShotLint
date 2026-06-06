@@ -189,15 +189,15 @@ Working projects in [`examples/`](./examples/):
 
 ```mermaid
 graph TD
-    SR["shot-lint\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm · any project"]
+    SL["**ShotLint**  ·  github.com/didley/shot-lint\n──────────────────────────────────\nGo-style linting for any TypeScript project\n• 90+ AST rules · standalone CLI · npm · jsr\n• No Deno required\n• Runtime utils — jsonParse, safeFetch, tryCatch"]
 
-    SS["shot\n────────────────\n• .shot file extension\n• Deno runtime + CLI\n• shot:std library\n• locked tsconfig"]
+    SS["**ShotScript**  ·  github.com/didley/ShotScript\n──────────────────────────────────\nThe full opinionated Go-style toolchain\n• .shot files · shot CLI · Deno runtime\n• shot:std standard library · import allowlist\n• Locked tsconfig — no user overrides"]
 
-    PROJ["Your TypeScript project\n(any runtime, any framework)"]
+    TS["**Your TypeScript project**\n(any runtime · any framework)"]
 
-    SR -->|"git submodule"| SS
-    SS -->|"checker"| SR
-    SR -->|"npx shot-lint"| PROJ
+    SL -->|"embedded as lint/ submodule"| SS
+    SS -->|"shot check calls ShotLint checker"| SL
+    SL -->|"npx shot-lint 'src/**/*.ts'"| TS
 ```
 
 **shot-lint** — discipline on your terms, in your project.  
