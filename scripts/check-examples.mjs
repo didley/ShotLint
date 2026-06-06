@@ -2,7 +2,7 @@
 // Not part of the published package — this avoids needing a CLI binary.
 import { readFileSync } from "node:fs"
 import { glob } from "glob"
-import { check } from "../dist/checker/mod.js"
+import { check } from "../dist/checker/index.js"
 
 const patterns = [
     "examples/hello-world/src/**/*.ts",
