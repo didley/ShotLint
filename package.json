@@ -1,7 +1,7 @@
 {
   "name": "shot-rules",
   "version": "0.1.0",
-  "description": "Opinionated TypeScript linting rules extracted from ShotScript — apply Go-style discipline to any TypeScript project.",
+  "description": "Go-style discipline for TypeScript. One canonical way to write every construct — 90+ AST rules enforced by a standalone CLI.",
   "license": "MIT",
   "repository": {
     "type": "git",

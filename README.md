@@ -1,6 +1,8 @@
 # shot-rules
 
-Opinionated TypeScript linting rules extracted from [ShotScript](https://github.com/didley/EspressoScript). Apply Go-style discipline to any TypeScript project — no ShotScript dependency, no Deno runtime required.
+Go-style discipline for TypeScript. One canonical way to write every construct — the same philosophy that makes Go codebases easy to read applies just as well to TypeScript.
+
+90+ AST rules enforced by a standalone CLI. No framework dependency. No runtime lock-in. Drop it into any TypeScript project.
 
 ```
 shot-rules 'src/**/*.ts'
@@ -14,7 +16,7 @@ src/types.ts:8:5: [require-readonly-property] Object type properties must be rea
 
 ## What it enforces
 
-The full set of rules from ShotScript's checker, adapted for any TypeScript codebase:
+90+ rules across every layer of TypeScript — functions, types, error handling, immutability, control flow, and code hygiene:
 
 | Category | Rules |
 |---|---|
@@ -36,13 +38,15 @@ The full set of rules from ShotScript's checker, adapted for any TypeScript code
 
 See [ShotScript's language docs](https://github.com/didley/EspressoScript/blob/main/docs/LANGUAGE.md) for the rationale behind each rule with before/after examples.
 
-## How it relates to ShotScript
+## Ecosystem
+
+shot-rules is a standalone project. It is also the rule engine powering [shot](https://github.com/didley/EspressoScript) — a complete Go-style TypeScript language and toolchain built on top of it.
 
 ```mermaid
 graph TD
-    SR["shot-rules\n(this repo)\n────────────────\n• Portable TS checker\n• 90+ AST rules\n• npm package\n• No runtime required"]
+    SR["shot-rules\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm package\n• Any TS project"]
 
-    SS["ShotScript / shot\n(EspressoScript)\n────────────────\n• .shot file extension\n• Deno runtime\n• shot:std library\n• shot CLI (check/run/build/test/fmt)\n• Import allowlist (shot:* only)\n• Strict tsconfig baked in\n• Go-style toolchain"]
+    SS["shot\n────────────────\n• .shot file extension\n• Deno runtime\n• shot:std library\n• shot CLI\n• Import allowlist\n• Locked tsconfig"]
 
     PROJ["Your TypeScript project\n(any runtime, any framework)"]
 
@@ -51,7 +55,7 @@ graph TD
     SR -->|"npx shot-rules\nor install globally"| PROJ
 ```
 
-**shot-rules** is the rule engine. **ShotScript** is a complete opinionated language built on top of it — adding the `shot:` import system, the `shot:std` standard library, Deno as the runtime, and a locked-down CLI that removes all configurability. If you want the full ShotScript experience you use `shot`. If you want the rules applied to your existing TS project on your own terms, you use `shot-rules`.
+Use **shot-rules** when you want the discipline applied to your own project on your own terms. Use **shot** when you want the full opinionated toolchain — fixed runtime, locked imports, `shot:std`, and zero configurability.
 
 ## Install
 
@@ -264,6 +268,18 @@ Two rules from ShotScript are intentionally omitted from `shot-rules` as they ar
 
 - **`imports-allowlist`** — ShotScript restricts imports to `shot:*` and `jsr:@shotscript/*`. This is not portable; use your bundler or a custom lint rule for import restrictions in your project.
 - **Deno-specific globals** in `no-throwing-globals` — `Deno.readTextFile` / `Deno.writeTextFile` bans are omitted. The rule still covers `JSON.parse`, `JSON.stringify`, and `fetch`.
+
+## Examples
+
+Working example projects are in [`examples/`](./examples/):
+
+| Example | What it shows |
+|---|---|
+| [`hello-world`](./examples/hello-world/) | Minimal setup — lint script, tsconfig extension |
+| [`fetch-user`](./examples/fetch-user/) | Async error handling with `safeFetch` + `jsonParse` |
+| [`calculator`](./examples/calculator/) | Fallible functions returning `Result<T>` tuples |
+
+Each example has its own `package.json` (with `shot-rules` as a dev dep) and a `tsconfig.json` extending `shot-rules/tsconfig/shot-rules.json`.
 
 ## Development
 

@@ -1,0 +1,10 @@
+{
+  "extends": "shot-rules/tsconfig/shot-rules.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts"]
+}
