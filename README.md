@@ -5,10 +5,10 @@
  ╚════██║██╔══██║██║   ██║   ██║
  ███████║██║  ██║╚██████╔╝   ██║
  ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝
- lint — TypeScript. One way to do everything.
+ lint — TypeScript, one way.
 ```
 
-TypeScript has four ways to write a function, three ways to handle errors, and two ways to declare a type — and most codebases use all of them. shot picks one of each and bans the rest.
+Four ways to write a function. Three ways to handle errors. Two ways to declare a type. shot picks one of each and bans the rest.
 
 Three things in one package:
 
