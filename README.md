@@ -8,7 +8,7 @@
  lint — TypeScript, one way.
 ```
 
-Four ways to write a function. Three ways to handle errors. Two ways to declare a type. shot picks one of each and bans the rest.
+Four ways to write a function. Three ways to handle errors. Two ways to declare a type. Shot picks one of each and bans the rest.
 
 Three things in one package:
 
@@ -140,7 +140,7 @@ if (el === null) { return [null, new Error('missing #app')] }
 | Imports | `no-require` `no-default-export` `no-index-import` |
 | Canonical forms | `no-array-generic` `no-banned-utility-types` `no-primitive-wrapper-types` |
 
-Full rationale and before/after examples for every rule: [`docs/LANGUAGE.md`](https://github.com/didley/EspressoScript/blob/main/docs/LANGUAGE.md).
+Full rationale and before/after examples for every rule: [`docs/LANGUAGE.md`](https://github.com/didley/ShotScript/blob/main/docs/LANGUAGE.md).
 
 Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
 
@@ -191,7 +191,7 @@ Working projects in [`examples/`](./examples/):
 graph TD
     SL["**ShotLint**  ·  github.com/didley/shot-lint\n──────────────────────────────────\nStrict linting for any TypeScript project\n• 90+ AST rules · standalone CLI · npm · jsr\n• No Deno required\n• Runtime utils — jsonParse, safeFetch, tryCatch"]
 
-    SS["**ShotScript**  ·  github.com/didley/ShotScript\n──────────────────────────────────\nThe full opinionated lint toolchain\n• .shot files · shot CLI · Deno runtime\n• shot:std standard library · import allowlist\n• Locked tsconfig — no user overrides"]
+    SS["**ShotScript**  ·  github.com/didley/ShotScript\n──────────────────────────────────\nThe full opinionated lint toolchain\n• .shot files · Shot CLI · Deno runtime\n• shot:std standard library · import allowlist\n• Locked tsconfig — no user overrides"]
 
     TS["**Your TypeScript project**\n(any runtime · any framework)"]
 
@@ -208,8 +208,8 @@ graph TD
     style REG stroke-dasharray: 5 5
 ```
 
-**shot-lint** — lint on your terms, in your project.  
-**[shot](https://github.com/didley/EspressoScript)** — the full opinionated toolchain built on top of it.
+**ShotLint** — lint on your terms, in your project.  
+**[ShotScript](https://github.com/didley/ShotScript)** — the full opinionated toolchain built on top of it.
 
 ## Development
 
