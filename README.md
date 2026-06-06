@@ -51,18 +51,7 @@ src/types.ts:8:5:  [require-readonly-property]  Object type properties must be r
 
 ## What changes
 
-**`null` is the only absent value**
-```ts
-// ❌ before — three ways to say "nothing": undefined, ?, missing
-type User = { id: number; avatar?: string; deletedAt?: Date }
-function findUser(id?: number): User | undefined { ... }
-
-// ✅ after — one way; every absence is a deliberate, typed null
-type User = { readonly id: number; readonly avatar: string | null; readonly deletedAt: Date | null }
-function findUser(id: number): [User | null, Error | null] { ... }
-```
-
-**Errors in the type signature, not the air**
+**Errors as values — failure is in the return type**
 ```ts
 // ❌ before — caller can't see this throws; nothing in the type says so
 async function getUser(id: number): Promise<User> {
@@ -70,7 +59,7 @@ async function getUser(id: number): Promise<User> {
     return res.json() as User
 }
 
-// ✅ after — failure is in the return type; the compiler tracks it
+// ✅ after — every failure path is explicit; the compiler tracks it
 async function getUser(id: number): Promise<[User | null, Error | null]> {
     const [res, fetchErr] = await safeFetch(`/users/${id}`)
     if (fetchErr !== null) { return [null, fetchErr] }
@@ -78,15 +67,38 @@ async function getUser(id: number): Promise<[User | null, Error | null]> {
 }
 ```
 
-**Immutable by default — no silent mutation**
+**`null` only — no `undefined`**
 ```ts
-// ❌ before — any function can mutate these; nothing stops it
+// ❌ before — three ways to say "nothing": undefined, ?, | undefined
+type User = { id: number; avatar?: string; deletedAt?: Date }
+function findUser(id?: number): User | undefined { ... }
+
+// ✅ after — one absence value, used consistently everywhere
+type User = { readonly id: number; readonly avatar: string | null; readonly deletedAt: Date | null }
+function findUser(id: number): [User | null, Error | null] { ... }
+```
+
+**Immutable by default**
+```ts
+// ❌ before — any function can mutate these; nothing in the type stops it
 type Config = { host: string; port: number }
 const ids: number[] = []
 
 // ✅ after — readonly at the type level; the compiler enforces it
 type Config = { readonly host: string; readonly port: number }
 const ids: ReadonlyArray<number> = []
+```
+
+**No escape hatches**
+```ts
+// ❌ before — type safety is optional; any and as let you opt out silently
+function parseConfig(raw: any): Config { return raw as Config }
+const el = document.getElementById('app')!
+
+// ✅ after — unknown at boundaries; no casting, no non-null assertions
+function parseConfig(raw: unknown): [Config | null, Error | null] { ... }
+const el = document.getElementById('app')
+if (el === null) { return [null, new Error('missing #app')] }
 ```
 
 ## Rules
