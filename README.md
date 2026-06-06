@@ -24,7 +24,8 @@ This Package:
 
 | | |
 |---|---|
-| **Rules** | 90+ AST rules enforced by a standalone CLI — no ESLint, no Biome, no framework lock-in |
+| **Rules** | 90+ AST rules enforced via CLI and TypeScript editor plugin — no ESLint, no Biome lock-in |
+| **Formatting** | Shareable configs for Biome, Prettier, and dprint — no semicolons, single quotes, 4-space indent |
 | **Utils** | Safe replacements for every banned global (`jsonParse`, `safeFetch`, `tryCatch`, …) |
 | **`AGENTS.md`** | Drop-in context file so AI coding assistants generate compliant code from the start |
 
@@ -154,6 +155,49 @@ Full rationale and before/after examples for every rule: [`docs/LANGUAGE.md`](ht
 
 Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
 
+## Editor plugin
+
+The TypeScript language service plugin surfaces shot-lint violations as editor diagnostics — red squiggles in VSCode and any editor that uses tsserver — without running a separate lint script.
+
+Add to your `tsconfig.json`:
+```json
+{ "compilerOptions": { "plugins": [{ "name": "shot-lint/plugin" }] } }
+```
+
+> **VSCode**: open the command palette → _TypeScript: Select TypeScript Version_ → _Use Workspace Version_. Without this, VSCode uses its bundled TypeScript which won't load the plugin.
+
+The CLI remains available for CI (`shot-lint 'src/**/*.ts'`). The plugin and CLI use the same rules.
+
+---
+
+## Formatting
+
+Shot's format: **no semicolons · single quotes · 4-space indent · 80 char lines**.
+
+Linting and formatting are separate concerns — shot-lint owns the rules, your formatter of choice owns the presentation. Pick one:
+
+**Biome** (recommended — fast, one tool)
+```json
+{ "extends": ["shot-lint/biome"] }
+```
+Biome's linter is disabled in the exported config — shot-lint handles linting.
+
+**Prettier**
+```js
+// prettier.config.js
+export { default } from 'shot-lint/prettier'
+```
+
+**dprint** (used by `shot fmt` / `deno fmt` internally — most faithful to ShotScript)
+
+Copy `node_modules/shot-lint/dprint/dprint.json` to your project root and update the plugin URL to the current dprint TypeScript plugin version.
+
+**EditorConfig** (universal, applies before any formatter)
+
+Copy `node_modules/shot-lint/editorconfig/shot-lint.editorconfig` to your project root as `.editorconfig`.
+
+---
+
 ## Strict tsconfig
 
 Ships a `tsconfig/shot-lint.json` with everything above `strict: true` — `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, and more.
@@ -223,6 +267,30 @@ graph TD
 
     style REG stroke-dasharray: 5 5
 ```
+
+## Replacing existing tools
+
+shot-lint replaces ESLint entirely, and replaces the linter portion of Biome or Deno's built-in lint. Keep whichever formatter you prefer.
+
+**Replacing ESLint**
+```sh
+npm uninstall eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+rm -f eslint.config.js .eslintrc.js .eslintrc.json .eslintignore
+```
+
+**Disabling Biome's linter** (keep Biome for formatting only)
+
+In `biome.json`, set `"linter": { "enabled": false }` — or extend `shot-lint/biome` which sets this automatically.
+
+**Disabling Deno's built-in linter**
+
+In `deno.json`:
+```json
+{ "lint": { "exclude": ["**/*"] } }
+```
+Or simply don't run `deno lint` — use `shot-lint` or the TypeScript plugin instead.
+
+---
 
 ## Development
 

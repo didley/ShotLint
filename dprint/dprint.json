@@ -1,0 +1,14 @@
+{
+    "typescript": {
+        "semiColons": "never",
+        "quoteStyle": "preferSingle",
+        "indentWidth": 4,
+        "lineWidth": 80,
+        "trailingCommas": "always",
+        "bracketSpacing": true,
+        "quoteProps": "asNeeded"
+    },
+    "plugins": [
+        "https://plugins.dprint.dev/typescript-0.93.0.wasm"
+    ]
+}

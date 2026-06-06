@@ -19,16 +19,25 @@
     "./utils": {
       "import": "./dist/utils/index.js",
       "types": "./dist/utils/index.d.ts"
-    }
+    },
+    "./plugin": "./dist/plugin.cjs",
+    "./tsconfig/shot-lint.json": "./tsconfig/shot-lint.json",
+    "./biome": "./biome/biome.json",
+    "./prettier": "./prettier/prettier.config.js",
+    "./dprint": "./dprint/dprint.json"
   },
   "main": "./dist/checker/mod.js",
   "types": "./dist/checker/mod.d.ts",
   "files": [
     "dist/",
-    "tsconfig/"
+    "tsconfig/",
+    "biome/",
+    "prettier/",
+    "dprint/",
+    "editorconfig/"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && esbuild src/plugin.ts --bundle --platform=node --format=cjs --external:typescript --outfile=dist/plugin.cjs --footer:js='module.exports=module.exports.default??module.exports;'",
     "test": "node --import tsx/esm tests/runner.ts && node --import tsx/esm --test tests/utils.test.ts",
     "check": "tsc --noEmit",
     "prepare": "git config core.hooksPath .githooks || true"
@@ -39,6 +48,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "esbuild": "^0.25.12",
     "tsx": "^4.0.0"
   },
   "engines": {
