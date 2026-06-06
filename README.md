@@ -39,11 +39,6 @@ npx shot-lint 'src/**/*.ts'          # one-off, no install
 npm install --save-dev shot-lint     # per-project
 ```
 
-**jsr** · [jsr.io/@shot/lint](https://jsr.io/@shot/lint)
-```sh
-deno add jsr:@shot/lint
-```
-
 Add to `package.json`:
 ```json
 { "scripts": { "lint": "shot-lint 'src/**/*.ts'" } }
@@ -249,7 +244,7 @@ Working projects in [`examples/`](./examples/):
 
 ```mermaid
 graph TD
-    SL["**ShotLint**  ·  github.com/didley/shot-lint\n──────────────────────────────────\nStrict linting for any TypeScript project\n• 90+ AST rules · standalone CLI · npm · jsr\n• No Deno required\n• Runtime utils — jsonParse, safeFetch, toResult, toPromiseResult"]
+    SL["**ShotLint**  ·  github.com/didley/shot-lint\n──────────────────────────────────\nStrict linting for any TypeScript project\n• 90+ AST rules · standalone CLI · npm\n• No Deno required\n• Runtime utils — jsonParse, safeFetch, toResult, toPromiseResult"]
 
     SS["**ShotScript**  ·  github.com/didley/ShotScript\n──────────────────────────────────\nThe full opinionated lint toolchain\n• .shot files · Shot CLI · Deno runtime\n• shot:std standard library · import allowlist\n• Locked tsconfig — no user overrides"]
 
@@ -257,7 +252,7 @@ graph TD
 
     SP["**Your ShotScript project**\n──────────────────────────────────\nZero-throw guarantee — every failure path is in the type\n• No any · no class · no undefined · no escape hatches\n• LLM-friendly: one form per construct, every time\n• Code your whole team can read on first glance"]
 
-    REG["**ShotScript Registry**  ·  planned\n──────────────────────────────────\nA package registry for the Shot ecosystem\n• Native .shot packages with full type guarantees\n• jsr/npm packages wrapped in error-tuple handlers\n• Every import returns  T | null, Error | null  — no surprises"]
+    REG["**ShotScript Registry**  ·  planned\n──────────────────────────────────\nA package registry for the Shot ecosystem\n• Native .shot packages with full type guarantees\n• npm packages wrapped in error-tuple handlers\n• Every import returns  T | null, Error | null  — no surprises"]
 
     SL -->|"embedded as lint/ submodule"| SS
     SS -->|"shot check calls ShotLint checker"| SL
