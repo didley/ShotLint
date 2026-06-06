@@ -1,0 +1,48 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed
+        id: version
+        run: |
+          PREV=$(git show HEAD~1:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null || echo "none")
+          CURR=$(node -p "require('./package.json').version")
+          echo "prev=$PREV" >> $GITHUB_OUTPUT
+          echo "curr=$CURR" >> $GITHUB_OUTPUT
+          if [ "$PREV" != "$CURR" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.version.outputs.changed == 'true'
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        if: steps.version.outputs.changed == 'true'
+        run: npm ci
+
+      - name: Build
+        if: steps.version.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Publish
+        if: steps.version.outputs.changed == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
