@@ -6,17 +6,21 @@
  ███████║██║  ██║╚██████╔╝   ██║   
  ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   
  TypeScript, one way.
-
- Shot extracts features from TypeScript, applying Go's "one canonical way" philosophy to the TS/JS ecosystem.
- Making coding easier for humans and LLMs.
 ```
+Shot extracts features from TypeScript, applying Go's "one canonical way" philosophy to the TS/JS ecosystem.
+Making coding easier for humans and LLMs.
+
+--
 
 Echosystem:
+
 **[ShotScript](https://github.com/didley/ShotScript)** — Opinionated toolchain strictly enforcing Shots principles.
+
 **[ShotLint](https://github.com/didley/ShotLint)** — Utils and config for typing, linting, and formatting with Shots principles.
 
+# ShotLint
 
-Three things in one package:
+This Package:
 
 | | |
 |---|---|
