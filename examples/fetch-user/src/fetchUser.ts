@@ -1,5 +1,5 @@
-import { safeFetch, jsonParse } from "shot-rules/utils"
-import type { ShotPromise } from "shot-rules/utils"
+import { safeFetch, jsonParse } from "shot-lint/utils"
+import type { ShotPromise } from "shot-lint/utils"
 
 type User = {
     readonly id: number

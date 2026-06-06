@@ -4,9 +4,9 @@ import { globSync } from "glob"
 import { check } from "./checker/mod.js"
 
 function usage(): void {
-    process.stderr.write("Usage: shot-rules <glob...>\n")
-    process.stderr.write("  shot-rules 'src/**/*.ts'\n")
-    process.stderr.write("  shot-rules src/index.ts src/lib.ts\n")
+    process.stderr.write("Usage: shot-lint <glob...>\n")
+    process.stderr.write("  shot-lint 'src/**/*.ts'\n")
+    process.stderr.write("  shot-lint src/index.ts src/lib.ts\n")
     process.exit(1)
 }
 
@@ -23,7 +23,7 @@ const files: readonly string[] = patterns.flatMap(function expand(pattern: strin
 })
 
 if (files.length === 0) {
-    process.stderr.write(`shot-rules: no files matched patterns: ${patterns.join(", ")}\n`)
+    process.stderr.write(`shot-lint: no files matched patterns: ${patterns.join(", ")}\n`)
     process.exit(1)
 }
 

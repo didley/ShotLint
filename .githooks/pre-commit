@@ -3,11 +3,11 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "shot-rules pre-commit: type check..."
+echo "shot-lint pre-commit: type check..."
 "$ROOT/node_modules/.bin/tsc" --noEmit --project "$ROOT/tsconfig.json"
 
-echo "shot-rules pre-commit: running tests..."
+echo "shot-lint pre-commit: running tests..."
 node --import tsx/esm "$ROOT/tests/runner.ts"
 node --import tsx/esm --test "$ROOT/tests/utils.test.ts"
 
-echo "shot-rules pre-commit: all checks passed."
+echo "shot-lint pre-commit: all checks passed."

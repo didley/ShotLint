@@ -1,5 +1,5 @@
 {
-  "extends": "shot-discipline/tsconfig/shot-rules.json",
+  "extends": "shot-lint/tsconfig/shot-lint.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",

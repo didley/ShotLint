@@ -35,7 +35,7 @@ jobs:
         run: node --import tsx/esm --test tests/utils.test.ts
 
   lint-examples:
-    name: Lint examples with shot-rules
+    name: Lint examples with shot-lint
     runs-on: ubuntu-latest
     needs: build-and-test
 

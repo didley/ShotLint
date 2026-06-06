@@ -122,11 +122,11 @@ const [quotient, divErr] = divide(10, 2)
 if (divErr !== null) { return [null, divErr] }
 ```
 
-**Use the utils from `shot-rules/utils` for banned globals:**
+**Use the utils from `shot-lint/utils` for banned globals:**
 
 ```ts
-import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-rules/utils"
-import type { Result } from "shot-rules/utils"
+import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-lint/utils"
+import type { Result } from "shot-lint/utils"
 
 // third-party calls that throw
 const [val, err] = tryCatch(function parse(): unknown { return thirdParty.parse(input) })
@@ -382,10 +382,10 @@ import { add } from "./math/add.ts"
 | `let` outside `for` header | `const` |
 | `var` | `const` |
 | `++` / `--` | `+= 1` / `-= 1` |
-| `JSON.parse` | `jsonParse<T>()` from `shot-rules/utils` |
-| `JSON.stringify` | `jsonStringify()` from `shot-rules/utils` |
-| `fetch(url)` | `safeFetch(url)` from `shot-rules/utils` |
-| Third-party throws | `tryCatch(() => ...)` from `shot-rules/utils` |
+| `JSON.parse` | `jsonParse<T>()` from `shot-lint/utils` |
+| `JSON.stringify` | `jsonStringify()` from `shot-lint/utils` |
+| `fetch(url)` | `safeFetch(url)` from `shot-lint/utils` |
+| Third-party throws | `tryCatch(() => ...)` from `shot-lint/utils` |
 | `Record<K, V>` | `Map<K, V>` |
 | Index signature `[k: string]: T` | `Map<string, T>` |
 | `Partial<T>` | Spell out optional fields with `\| null` |
@@ -414,7 +414,7 @@ import { add } from "./math/add.ts"
 
 5. **Using `undefined`** — the only nullable value is `null`. Write `string | null`, never `string | undefined`.
 
-6. **Calling `JSON.parse` / `fetch` directly** — import `jsonParse` / `safeFetch` from `shot-rules/utils` instead.
+6. **Calling `JSON.parse` / `fetch` directly** — import `jsonParse` / `safeFetch` from `shot-lint/utils` instead.
 
 7. **Writing optional properties** — `{ name?: string }` is banned. Write `{ readonly name: string | null }`.
 

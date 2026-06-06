@@ -23,24 +23,24 @@ Three things in one package:
 ## Install
 
 ```sh
-npx shot-discipline 'src/**/*.ts'          # one-off, no install
-npm install --save-dev shot-discipline     # per-project
+npx shot-lint 'src/**/*.ts'          # one-off, no install
+npm install --save-dev shot-lint     # per-project
 ```
 
 Add to `package.json`:
 ```json
-{ "scripts": { "lint": "shot-discipline 'src/**/*.ts'" } }
+{ "scripts": { "lint": "shot-lint 'src/**/*.ts'" } }
 ```
 
 Extend the strict tsconfig:
 ```json
-{ "extends": "shot-discipline/tsconfig/shot-rules.json" }
+{ "extends": "shot-lint/tsconfig/shot-lint.json" }
 ```
 
 ---
 
 ```sh
-npx shot-discipline 'src/**/*.ts'
+npx shot-lint 'src/**/*.ts'
 
 src/auth.ts:12:5:  [no-arrow-functions]        Arrow functions are not allowed.
 src/auth.ts:34:3:  [no-throw]                  throw is not allowed — return [null, error] instead.
@@ -140,14 +140,14 @@ Flags: `--json` for machine-readable output. Exit `0` = clean, `1` = violations.
 
 ## Strict tsconfig
 
-Ships a `tsconfig/shot-rules.json` with everything above `strict: true` — `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, and more.
+Ships a `tsconfig/shot-lint.json` with everything above `strict: true` — `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`, and more.
 
 ## Runtime utils
 
-The rules ban `JSON.parse`, `JSON.stringify`, and `fetch` because they throw. `shot-discipline/utils` provides the safe replacements — all return `[value, null] | [null, Error]`.
+The rules ban `JSON.parse`, `JSON.stringify`, and `fetch` because they throw. `shot-lint/utils` provides the safe replacements — all return `[value, null] | [null, Error]`.
 
 ```ts
-import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-discipline/utils"
+import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-lint/utils"
 
 // third-party calls that might throw
 const [val, err] = tryCatch(() => someLib.parse(input))
@@ -161,7 +161,7 @@ const [res, err]   = await safeFetch("https://api.example.com/users/1")
 
 `Result<T>` is exported too — use it to type your own fallible functions:
 ```ts
-import type { Result } from "shot-discipline/utils"
+import type { Result } from "shot-lint/utils"
 
 function divide(a: number, b: number): Result<number> {
     if (b === 0) { return [null, new Error("division by zero")] }
@@ -183,7 +183,7 @@ Working projects in [`examples/`](./examples/):
 
 ```mermaid
 graph TD
-    SR["shot-discipline\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm · any project"]
+    SR["shot-lint\n────────────────\n• 90+ AST rules\n• Runtime utils\n• npm · any project"]
 
     SS["shot\n────────────────\n• .shot file extension\n• Deno runtime + CLI\n• shot:std library\n• locked tsconfig"]
 
@@ -191,17 +191,17 @@ graph TD
 
     SR -->|"git submodule"| SS
     SS -->|"checker"| SR
-    SR -->|"npx shot-rules"| PROJ
+    SR -->|"npx shot-lint"| PROJ
 ```
 
-**shot-discipline** — discipline on your terms, in your project.  
+**shot-lint** — discipline on your terms, in your project.  
 **[shot](https://github.com/didley/EspressoScript)** — the full opinionated toolchain built on top of it.
 
 ## Development
 
 ```sh
-git clone https://github.com/didley/shot-rules
-cd shot-rules && npm install
+git clone https://github.com/didley/shot-lint
+cd shot-lint && npm install
 npm run build && npm test
 ```
 

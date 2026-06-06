@@ -1,4 +1,4 @@
-// Valid shot-rules TypeScript — all rules pass
+// Valid shot-lint TypeScript — all rules pass
 
 export type User = {
     readonly id: number

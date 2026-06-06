@@ -1,19 +1,19 @@
 /**
- * shot-rules/utils — safe wrappers for globals that throw.
+ * shot-lint/utils — safe wrappers for globals that throw.
  *
  * Every function here returns [value, error] instead of throwing.
  * These are the canonical replacements for the globals banned by
  * the no-throwing-globals rule.
  *
  * Usage:
- *   import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-rules/utils"
+ *   import { tryCatch, tryCatchAsync, jsonParse, jsonStringify, safeFetch } from "shot-lint/utils"
  */
 
 export type Result<T> = [T, null] | [null, Error]
 
 /**
  * Wraps any synchronous call that might throw.
- * Use for third-party library calls that shot-rules can't detect.
+ * Use for third-party library calls that shot-lint can't detect.
  *
  *   const [value, err] = tryCatch(() => someLib.parse(input))
  */
@@ -30,7 +30,7 @@ export function tryCatch<T>(fn: () => T): Result<T> {
 
 /**
  * Wraps any async call that might reject.
- * Use for third-party async functions that shot-rules can't detect.
+ * Use for third-party async functions that shot-lint can't detect.
  *
  *   const [value, err] = await tryCatchAsync(() => someLib.fetchData(id))
  */

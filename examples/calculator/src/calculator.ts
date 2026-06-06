@@ -1,4 +1,4 @@
-import type { Result } from "shot-rules/utils"
+import type { Result } from "shot-lint/utils"
 
 export function add(a: number, b: number): number {
     return a + b
